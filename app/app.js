@@ -1,3 +1,3 @@
 (() => {
-    angular.module('imgSlider', []);
+    angular.module('imgSlider', ['ngAnimate']);
 })();
