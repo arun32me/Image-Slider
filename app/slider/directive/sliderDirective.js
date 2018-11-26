@@ -17,12 +17,12 @@
             scope.slideshow = [
                 {
                     title: 'Image 1',
-                    src: 'img1.jpg',
+                    src: 'img2.jpg',
                     visible: true
                 },
                 {
                     title: 'Image 2',
-                    src: 'img2.jpg',
+                    src: 'img1.jpg',
                     visible: false
                 },
                 {
