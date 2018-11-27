@@ -1,14 +1,15 @@
 <style>
   .slideshow {
+    position: relative;
     width: 90%;
+    min-width: 490px;
     margin: auto;
-    background-color: blanchedalmond;
   }
 
   .slider {
     position: relative;
     width: 100%;
-    background-color: cadetblue;
+    overflow: hidden;
   }
 
   .slide {
@@ -38,7 +39,6 @@
   }
 
   .slideoverlay {
-    /* width: 100%; */
     position: relative;
     top: 0px;
     left: 0px;
@@ -47,11 +47,12 @@
   }
 
   .sliderArrows {
-    position: relative;
+    /* position: relative; */
     font-size: 208px;
     color: rgba(255, 255, 255, 0.3);
-    top: 100px;
+    /* top: 100px; */
     cursor: pointer;
+    margin-top: 8%;
   }
 
   .sliderArrows.right {
@@ -60,14 +61,14 @@
 
   .img {
     width: 100%;
+    height: auto;
   }
   .btnGroup {
-    /* background-color: bisque; */
-    width: 150px;
+    width: 280px;
     text-align: center;
     margin: auto;
     position: relative;
-    top: 180px;
+    top: 0px;
   }
   .rowbtns {
     padding: 10px;
@@ -77,19 +78,41 @@
   .rowbtns.active {
     color: gray;
   }
+  @media only screen and ( max-width : 1000px) {
+    .sliderArrows {
+      font-size: 174px;
+    }
+    .btnGroup {
+      top: -10px;
+    }
+  }
+  @media only screen and ( max-width : 800px) {
+    .sliderArrows {
+      font-size: 134px;
+    }
+    .btnGroup {
+      top: -20px;
+    }
+  }
+  @media only screen and ( max-width : 600px) {
+    .sliderArrows {
+      font-size: 104px;
+    }
+    .btnGroup {
+      top: -20px;
+    }
+  }
 </style>
 <div class="slideshow">
   <div class="slider" ng-controller="sliderController">
     <div class="slide" ng-repeat="slide in slideshow track by $index" ng-show="slide.visible">
-      <img class="img" src="assets/images/{{slide.src}}" width="100%">
+      <img class="img" src="assets/images/{{slide.src}}">
     </div>
     <div class="slideoverlay">
       <i ng-click="previous()" class="material-icons sliderArrows">keyboard_arrow_left</i>
       <i ng-click="next()" class="material-icons sliderArrows right">keyboard_arrow_right</i>
-      <!-- <button ng-click="previous()">Previous</button><button ng-click="next()">Next</button> -->
       <div class="btnGroup">
-      <!-- <a href="#" ng-repeat="slide in slideshow track by $index" ng-click="thisImage($index)">{{$index}}</a> -->
-      <i class="material-icons rowbtns" ng-repeat="slide in slideshow track by $index" ng-click="thisImage($index)">fiber_manual_record</i>
+      <i class="material-icons rowbtns" ng-repeat="slide in slideshow track by $index" ng-class="{active: slide.visible}" ng-click="thisImage($index)">fiber_manual_record</i>
     </div>
     </div>
   </div>

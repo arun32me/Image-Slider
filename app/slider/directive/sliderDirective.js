@@ -1,8 +1,8 @@
 (() => {
     angular.module('imgSlider')
     .directive('sliderDirective', sliderDirective);
-
-    function sliderDirective() {
+    sliderDirective.$inject = ['$interval'];
+    function sliderDirective($interval) {
         let sliderObject = {
             slideshow: "=",
             link: link,
@@ -17,17 +17,32 @@
             scope.slideshow = [
                 {
                     title: 'Image 1',
-                    src: 'img2.jpg',
+                    src: 'img1.jpg',
                     visible: true
                 },
                 {
                     title: 'Image 2',
-                    src: 'img1.jpg',
+                    src: 'img2.jpg',
                     visible: false
                 },
                 {
                     title: 'Image 3',
                     src: 'img3.jpg',
+                    visible: false
+                },
+                {
+                    title: 'Image 4',
+                    src: 'img4.jpg',
+                    visible: false
+                },
+                {
+                    title: 'Image 5',
+                    src: 'img5.jpg',
+                    visible: false
+                },
+                {
+                    title: 'Image 6',
+                    src: 'img6.jpg',
                     visible: false
                 }
             ];
@@ -57,9 +72,12 @@
                 changeImage();
             });
 
+            $interval(function() {
+                scope.next();
+            }, 5000);
+
             function changeImage() {
                 for(let i = 0; i < scope.slideshow.length; i++) {
-                    console.log('loop');
                     if(scope.currentIndex === i) {
                         scope.slideshow[i].visible = true;
                     } else {
