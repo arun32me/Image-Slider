@@ -112,7 +112,7 @@
       <i ng-click="previous()" class="material-icons sliderArrows">keyboard_arrow_left</i>
       <i ng-click="next()" class="material-icons sliderArrows right">keyboard_arrow_right</i>
       <div class="btnGroup">
-      <i class="material-icons rowbtns" ng-repeat="slide in slideshow track by $index" ng-class="{active: slide.visible}" ng-click="thisImage($index)">fiber_manual_record</i>
+      <i class="material-icons rowbtns" ng-repeat="slide in viewDots track by $index" ng-class="{active: slide.visible}" ng-click="thisImage($index)">fiber_manual_record</i>
     </div>
     </div>
   </div>

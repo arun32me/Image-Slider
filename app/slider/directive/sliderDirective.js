@@ -13,6 +13,7 @@
 
         function link(scope, element, attr) {
             scope.currentIndex = 0;
+            let slideTimer;
 
             scope.slideshow = [
                 {
@@ -47,6 +48,26 @@
                 }
             ];
 
+            scope.viewDots = scope.slideshow.slice();
+            scope.viewDots.length = 3;
+
+            function slideDotRoller() {
+                console.log('slideDotRoller');
+                if(scope.currentIndex === scope.viewDots.length - 2) {
+                    console.log('On Image');
+                    let lastIndex = scope.slideshow.length - 1;
+                    console.log('lastIndex : '+lastIndex);
+                    let numOfElements = 3;
+                    if((scope.viewDots.length - 1) + numOfElements > lastIndex) {
+                        numOfElements = lastIndex - scope.currentIndex;
+                    }
+                    console.log('numOfElements : ' + numOfElements);
+                    let subArr = scope.slideshow.slice(scope.currentIndex + 1, scope.currentIndex + numOfElements + 1);
+                    console.log(subArr);
+                    scope.viewDots = scope.viewDots.concat(subArr);
+                    console.log(scope.viewDots);
+                }
+            }
 
             scope.next = function() {
                 if(scope.currentIndex >= scope.slideshow.length - 1) {
@@ -54,6 +75,9 @@
                 } else {
                     scope.currentIndex++;
                 }
+                slideDotRoller();
+                $interval.cancel(slideTimer);
+                autoSlide();
             }
 
             scope.previous = function() {
@@ -62,19 +86,26 @@
                 } else {
                     scope.currentIndex--;
                 }
+                $interval.cancel(slideTimer);
+                autoSlide();
             }
 
             scope.thisImage = function(index) {
                 scope.currentIndex = index;
+                $interval.cancel(slideTimer);
+                autoSlide();
             }
 
             scope.$watch('currentIndex', function() {
                 changeImage();
             });
 
-            $interval(function() {
-                scope.next();
-            }, 5000);
+            function autoSlide() {
+                // slideTimer = $interval(function() {
+                //     scope.next();
+                // }, 5000);
+            }
+            autoSlide();
 
             function changeImage() {
                 for(let i = 0; i < scope.slideshow.length; i++) {
