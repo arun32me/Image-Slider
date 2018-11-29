@@ -38,6 +38,29 @@
     opacity: 1;
   }
 
+
+
+
+
+
+  .rowbtns.ng-hide-add,
+  .rowbtns.ng-hide-remove {
+    -webkit-transition: all linear 0.5s;
+    -moz-transition: all linear 0.5s;
+    -o-transition: all linear 0.5s;
+    transition: all linear 0.5s;
+  }
+
+  .rowbtns.ng-hide-add.ng-hide-add-active,
+  .rowbtns.ng-hide-remove {
+    opacity: 0;
+  }
+
+  .rowbtns.ng-hide-add,
+  .rowbtns.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
+  }
+
   .slideoverlay {
     position: relative;
     top: 0px;
@@ -64,7 +87,7 @@
     height: auto;
   }
   .btnGroup {
-    width: 280px;
+    width: 380px;
     text-align: center;
     margin: auto;
     position: relative;
@@ -76,7 +99,7 @@
     cursor: pointer;
   }
   .rowbtns.active {
-    color: gray;
+    color: gray
   }
   @media only screen and ( max-width : 1000px) {
     .sliderArrows {
@@ -106,13 +129,13 @@
 <div class="slideshow">
   <div class="slider" ng-controller="sliderController">
     <div class="slide" ng-repeat="slide in slideshow track by $index" ng-show="slide.visible">
-      <img class="img" src="assets/images/{{slide.src}}">
+      <img class="img" ng-src="assets/images/{{slide.src}}">
     </div>
     <div class="slideoverlay">
       <i ng-click="previous()" class="material-icons sliderArrows">keyboard_arrow_left</i>
       <i ng-click="next()" class="material-icons sliderArrows right">keyboard_arrow_right</i>
       <div class="btnGroup">
-      <i class="material-icons rowbtns" ng-repeat="slide in slideshow track by $index" ng-class="{active: slide.visible}" ng-if="($index - currentIndex) < 3 && ($index - currentIndex) > -3" ng-click="thisImage($index)">fiber_manual_record</i>
+      <i class="material-icons rowbtns" ng-repeat="slide in slideshow track by $index" ng-class="{active: slide.visible}" ng-show="($index - currentIndex) < 3 && ($index - currentIndex) > -3" ng-click="thisImage($index)">fiber_manual_record</i>
     </div>
     </div>
   </div>

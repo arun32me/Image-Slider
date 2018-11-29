@@ -68,27 +68,27 @@
                 }
             ];
 
-            scope.viewDots = scope.slideshow.slice();
-            scope.viewDots.length = 3;
+            // scope.viewDots = scope.slideshow.slice();
+            // scope.viewDots.length = 3;
 
-            function slideDotRoller() {
-                console.log('slideDotRoller');
-                if(scope.currentIndex === scope.viewDots.length - 2) {
-                    console.log('On Image');
-                    let lastIndex = scope.slideshow.length - 1;
-                    console.log('lastIndex : '+lastIndex);
-                    let numOfElements = 3;
-                    if((scope.viewDots.length - 1) + numOfElements > lastIndex) {
-                        numOfElements = lastIndex - scope.currentIndex;
-                    }
-                    console.log('numOfElements : ' + numOfElements);
-                    let subArr = scope.slideshow.slice(scope.currentIndex + 1, scope.currentIndex + numOfElements + 1);
-                    console.log(subArr);
-                    scope.viewDots = scope.viewDots.concat(subArr);
-                    scope.viewDots.splice(0, numOfElements);
-                    console.log(scope.viewDots);
-                }
-            }
+            // function slideDotRoller() {
+            //     console.log('slideDotRoller');
+            //     if(scope.currentIndex === scope.viewDots.length - 2) {
+            //         console.log('On Image');
+            //         let lastIndex = scope.slideshow.length - 1;
+            //         console.log('lastIndex : '+lastIndex);
+            //         let numOfElements = 3;
+            //         if((scope.viewDots.length - 1) + numOfElements > lastIndex) {
+            //             numOfElements = lastIndex - scope.currentIndex;
+            //         }
+            //         console.log('numOfElements : ' + numOfElements);
+            //         let subArr = scope.slideshow.slice(scope.currentIndex + 1, scope.currentIndex + numOfElements + 1);
+            //         console.log(subArr);
+            //         scope.viewDots = scope.viewDots.concat(subArr);
+            //         scope.viewDots.splice(0, numOfElements);
+            //         console.log(scope.viewDots);
+            //     }
+            // }
 
             scope.next = function() {
                 if(scope.currentIndex >= scope.slideshow.length - 1) {
@@ -122,9 +122,9 @@
             });
 
             function autoSlide() {
-                // slideTimer = $interval(function() {
-                //     scope.next();
-                // }, 5000);
+                slideTimer = $interval(function() {
+                    scope.next();
+                }, 5000);
             }
             autoSlide();
 
