@@ -45,6 +45,26 @@
                     title: 'Image 6',
                     src: 'img6.jpg',
                     visible: false
+                },
+                {
+                    title: 'Image 7',
+                    src: 'img7.jpg',
+                    visible: false
+                },
+                {
+                    title: 'Image 8',
+                    src: 'img8.jpg',
+                    visible: false
+                },
+                {
+                    title: 'Image 9',
+                    src: 'img9.jpg',
+                    visible: false
+                },
+                {
+                    title: 'Image 10',
+                    src: 'img10.jpg',
+                    visible: false
                 }
             ];
 
@@ -65,6 +85,7 @@
                     let subArr = scope.slideshow.slice(scope.currentIndex + 1, scope.currentIndex + numOfElements + 1);
                     console.log(subArr);
                     scope.viewDots = scope.viewDots.concat(subArr);
+                    scope.viewDots.splice(0, numOfElements);
                     console.log(scope.viewDots);
                 }
             }
@@ -75,7 +96,7 @@
                 } else {
                     scope.currentIndex++;
                 }
-                slideDotRoller();
+                // slideDotRoller();
                 $interval.cancel(slideTimer);
                 autoSlide();
             }
