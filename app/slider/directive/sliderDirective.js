@@ -14,6 +14,8 @@
         function link(scope, element, attr) {
             scope.currentIndex = 0;
             let slideTimer;
+            scope.dotIndex = 0;
+            scope.viewDots = [];
 
             scope.slideshow = [
                 {
@@ -68,44 +70,51 @@
                 }
             ];
 
-            // scope.viewDots = scope.slideshow.slice();
-            // scope.viewDots.length = 3;
+            var start = 0;
+            var end = 5;
+            var numOfDots = 5;
 
-            // function slideDotRoller() {
-            //     console.log('slideDotRoller');
-            //     if(scope.currentIndex === scope.viewDots.length - 2) {
-            //         console.log('On Image');
-            //         let lastIndex = scope.slideshow.length - 1;
-            //         console.log('lastIndex : '+lastIndex);
-            //         let numOfElements = 3;
-            //         if((scope.viewDots.length - 1) + numOfElements > lastIndex) {
-            //             numOfElements = lastIndex - scope.currentIndex;
-            //         }
-            //         console.log('numOfElements : ' + numOfElements);
-            //         let subArr = scope.slideshow.slice(scope.currentIndex + 1, scope.currentIndex + numOfElements + 1);
-            //         console.log(subArr);
-            //         scope.viewDots = scope.viewDots.concat(subArr);
-            //         scope.viewDots.splice(0, numOfElements);
-            //         console.log(scope.viewDots);
-            //     }
-            // }
+
+            function viewDotSlide() {
+                if(scope.currentIndex === end) {
+                    start = end;
+                    end = 9;
+                }
+                if(scope.currentIndex === start) {
+                    start = 0;
+                    end = 5;
+                }
+                for(let i = start; i <= end; i++) {
+                    scope.viewDots[i] = scope.slideshow[i];
+                }
+                console.log(scope.viewDots);
+            }
+            viewDotSlide();
 
             scope.next = function() {
+                viewDotSlide();
                 if(scope.currentIndex >= scope.slideshow.length - 1) {
                     scope.currentIndex = 0;
                 } else {
                     scope.currentIndex++;
                 }
-                // slideDotRoller();
+            //    scope.dotIndex++;
+              
                 $interval.cancel(slideTimer);
                 autoSlide();
             }
 
             scope.previous = function() {
+                viewDotSlide();
                 if(scope.currentIndex <= 0) {
                     scope.currentIndex = scope.slideshow.length - 1;
                 } else {
                     scope.currentIndex--;
+                }
+                if(scope.dotIndex <= 0) {
+                    scope.dotIndex = scope.viewDots.length - 1;
+                } else {
+                    scope.dotIndex--;
                 }
                 $interval.cancel(slideTimer);
                 autoSlide();
@@ -118,22 +127,22 @@
             }
 
             scope.$watch('currentIndex', function() {
-                changeImage();
+                changeImage(scope.slideshow, scope.currentIndex);
             });
 
             function autoSlide() {
-                slideTimer = $interval(function() {
-                    scope.next();
-                }, 5000);
+                // slideTimer = $interval(function() {
+                //     scope.next();
+                // }, 5000);
             }
             autoSlide();
 
-            function changeImage() {
-                for(let i = 0; i < scope.slideshow.length; i++) {
-                    if(scope.currentIndex === i) {
-                        scope.slideshow[i].visible = true;
+            function changeImage(dataset, index) {
+                for(let i = 0; i < dataset.length; i++) {
+                    if(index === i) {
+                        dataset[i].visible = true;
                     } else {
-                        scope.slideshow[i].visible = false;
+                        dataset[i].visible = false;
                     }
                 }
             }
