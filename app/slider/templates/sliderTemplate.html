@@ -133,7 +133,7 @@
     <div class="slide" ng-repeat="slide in slideshow track by $index" ng-show="slide.visible">
       <img class="img" ng-src="assets/images/{{slide.src}}">
     </div>
-    <div class="slideoverlay">
+    <div class="slideoverlay" ng-mouseenter="pauseSlide()" ng-mouseleave="startSlide()">
       <i ng-click="previous()" class="material-icons sliderArrows">keyboard_arrow_left</i>
       <i ng-click="next()" class="material-icons sliderArrows right">keyboard_arrow_right</i>
       <div class="btnGroup">
